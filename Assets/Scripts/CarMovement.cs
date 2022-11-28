@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     [SerializeField] private List<AxleInfo> axleInfos;
-    //[SerializeField] private Joystick joystick;
+    [SerializeField] private Joystick joystick;
     [SerializeField] private float maxMotorTorque = 1000;
     [SerializeField] private float maxSteeringAngle = 110;
     [SerializeField] private float breakForce = 3000;
@@ -13,8 +13,6 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private Light[] lights;
     [SerializeField] private Vector3 centerOfMass;
 
-    private bool turnLeft;
-    private bool turnRight;
     private Rigidbody rb;
     private float motor;
     private float steering;
@@ -65,11 +63,11 @@ public class CarMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //pitch = Mathf.Lerp(0.6f, 1.6f, joystick.Vertical);
-        //motorSound.pitch = Mathf.Lerp(GetComponent<AudioSource>().pitch, pitch, 0.01f);
+        pitch = Mathf.Lerp(0.6f, 1.6f, joystick.Vertical);
+        motorSound.pitch = Mathf.Lerp(GetComponent<AudioSource>().pitch, pitch, 0.01f);
 
-        //motor = maxMotorTorque * joystick.Vertical * 1.5f; //ускорение
-        //steering = maxSteeringAngle * joystick.Horizontal; //угол поворота
+        motor = maxMotorTorque * joystick.Vertical * 1.5f; //ускорение
+        steering = maxSteeringAngle * joystick.Horizontal; //угол поворота
         foreach (AxleInfo axleInfo in axleInfos)
         {
             if (axleInfo.steering)
@@ -108,48 +106,6 @@ public class CarMovement : MonoBehaviour
             VisualWheels(axleInfo.rightWheel);
         }
     }
-
-    public void MoveForward()
-    {
-        motor = maxMotorTorque;
-    }
-    public void DontMoveForward()
-    {
-        motor = 0;
-    }
-
-    public void MoveBackwords()
-    {
-        motor = -maxMotorTorque;
-    }
-
-    public void DontMoveBackwords()
-    {
-        motor = 0;
-    }
-
-    public void TurnLeft()
-    {
-        steering = -maxSteeringAngle;
-    }
-
-    public void TurnRight()
-    {
-        steering = maxSteeringAngle;
-    }
-
-    public void DontTurn()
-    {
-        steering = 0;
-    }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.transform.CompareTag("Fence") || collision.transform.CompareTag("Building"))
-    //    {
-    //        rb.AddForce(-transform.position * 100, ForceMode.Impulse);
-    //    }
-    //}
 }
 
 [System.Serializable]
