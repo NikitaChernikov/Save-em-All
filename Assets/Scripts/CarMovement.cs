@@ -4,6 +4,7 @@ public class CarMovement : MonoBehaviour
 {
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private float moveSpeed;
+    [SerializeField] Transform[] spawnersPoints;
 
     public static bool PointerDown = false;
 
@@ -19,6 +20,12 @@ public class CarMovement : MonoBehaviour
     {
         engineSound = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        Transform pos = spawnersPoints[Random.Range(0, spawnersPoints.Length)];
+        transform.position = pos.position;
     }
 
     private void Update()
