@@ -11,21 +11,34 @@ public class CarMovement : MonoBehaviour
     private float verticalDirection;
     private float horizontalDirection;
 
+    //engine sound
+    private AudioSource engineSound;
+    private float pitch;
+
     private void Awake()
     {
+        engineSound = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+        transform.position = new Vector3(transform.position.x, -0.23f, transform.position.z);
         verticalDirection = -joystick.Horizontal * moveSpeed;
         horizontalDirection = -joystick.Vertical * moveSpeed;
+        pitch = Mathf.Max(Mathf.Lerp(0.6f, 2f, Mathf.Abs(joystick.Vertical)), Mathf.Lerp(0.6f, 2f, Mathf.Abs(joystick.Horizontal)));
+        engineSound.pitch = Mathf.Lerp(engineSound.pitch, pitch, 0.01f);
 
         //rotation
         float hAxis = -verticalDirection;
         float vAxis = -horizontalDirection;
         float yAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0f, yAxis, 0f);
+    }
+
+    public float GetSpeed()
+    {
+        return rb.velocity.magnitude;
     }
 
     private void FixedUpdate()

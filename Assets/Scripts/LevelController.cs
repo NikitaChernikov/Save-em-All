@@ -83,6 +83,7 @@ public class LevelController : MonoBehaviour
 
     public void RestartGame()
     {
+        loadingCanvas.SetActive(true);
         StartCoroutine(WaitScene(SceneManager.GetActiveScene().buildIndex));
     }
 

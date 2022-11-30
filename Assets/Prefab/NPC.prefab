@@ -11014,7 +11014,7 @@ GameObject:
   - component: {fileID: 614176954797743988}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11102,7 +11102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4679b17f288bfb943a9f7b540d5b5e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   particles: {fileID: 557384995977211628}
   point: {fileID: 7191789758528870907}
   hit: {fileID: 3365247487026216874}

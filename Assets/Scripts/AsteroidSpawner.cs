@@ -8,10 +8,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     private Vector3 range;
     private float timer;
-    private float cooldown = 5;
-    private float cooldownTimeTimer = 0;
-    private float decreaseRange = 0.5f;
-    private float decreaseCooldown = 30;
+    private float cooldown = 3;
 
     private void Update()
     {

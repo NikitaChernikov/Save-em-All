@@ -41,17 +41,17 @@ public class NPC : MonoBehaviour
             agent.SetDestination(player.transform.position);
             if (Vector3.Distance(transform.position, player.transform.position) < 5f)
             {
-                //if (player.GetSpeed() < 10)
-                //{
-                //    point.Play();
-                //    level.ChangeScore();
-                //    Destroy(gameObject);
-                //}
-                //else
-                //{
-                //    hit.Play();
-                //    Death(true);
-                //}
+                if (player.GetSpeed() < 10)
+                {
+                    point.Play();
+                    level.ChangeScore();
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    hit.Play();
+                    Death(true);
+                }
             }
         }
     }
@@ -60,18 +60,18 @@ public class NPC : MonoBehaviour
     {
         agent.enabled = false;
         character.enabled = false;
-        //foreach (Rigidbody rb in childrenRb)
-        //{
-        //    rb.isKinematic = false;
-        //    if (isPlayer)
-        //    {
-        //        rb.AddForce(-player.transform.forward * player.GetSpeed() * 4, ForceMode.Impulse);
-        //    }
-        //    else
-        //    {
-        //        rb.AddExplosionForce(100, transform.position, -30);
-        //    }
-        //}
+        foreach (Rigidbody rb in childrenRb)
+        {
+            rb.isKinematic = false;
+            if (isPlayer)
+            {
+                rb.AddForce(-player.transform.forward * player.GetSpeed() * 4, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddExplosionForce(100, transform.position, -30);
+            }
+        }
         anim.enabled = false;
         Destroy(gameObject, 3);
         enabled = false;
