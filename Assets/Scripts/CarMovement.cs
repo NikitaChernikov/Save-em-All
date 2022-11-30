@@ -45,7 +45,7 @@ public class CarMovement : MonoBehaviour
     {
         if (PointerDown)
         { 
-            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.01f);
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.02f);
         }
         else
         {
