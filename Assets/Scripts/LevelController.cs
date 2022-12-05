@@ -18,7 +18,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private Slider bar;
     [SerializeField] private GameObject pauseUI;
 
-    private bool isSound = true;
+    //private bool isSound = true;
     private byte score = 0;
 
     private void Start()
