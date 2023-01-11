@@ -23,6 +23,7 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
+
         Time.timeScale = 1;
         if (isMenu)
         {
@@ -36,11 +37,11 @@ public class LevelController : MonoBehaviour
             }
             if (PlayerPrefs.HasKey("Money"))
             {
-                moneyText.text = "MONEY: " + PlayerPrefs.GetInt("Money");
+                moneyText.text = "GOLD: " + PlayerPrefs.GetInt("Money");
             }
             else
             {
-                moneyText.text = "MONEY: 0";
+                moneyText.text = "GOLD: 0";
             }
         }
     }
@@ -58,6 +59,11 @@ public class LevelController : MonoBehaviour
     }
 
     public void OpenStore()
+    {
+        Invoke("IOpenStore", 0.2f);
+    }
+
+    private void IOpenStore()
     {
         ui[0].SetActive(false);
         ui[1].SetActive(true);

@@ -5,8 +5,8 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GameObject npcPrefab;
 
-    private float cooldown = 2f;
-    private float timer = 2;
+    private float cooldown = 1f;
+    private float timer = 1;
     private Transform randomSpawnPoint;
 
     private void Update()

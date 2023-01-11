@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class AsteroidSpawner : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector3 range;
     private float timer;
     private float cooldown = 3;
+
+    private void Start()
+    {
+        StartCoroutine(ChangeCooldown());
+    }
 
     private void Update()
     {
@@ -26,5 +32,14 @@ public class AsteroidSpawner : MonoBehaviour
         range.y = transform.position.y;
         range.z = Random.Range(rangeBordersZ.x, rangeBordersZ.y);
         Instantiate(asteroidPrefab, range, asteroidPrefab.transform.rotation);
+    }
+
+    private IEnumerator ChangeCooldown()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(30);
+            if (cooldown >= 0.5f) cooldown -= 0.5f;
+        }
     }
 }

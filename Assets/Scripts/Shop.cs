@@ -4,11 +4,18 @@ public class Shop : MonoBehaviour
 {
     private ShopUI shopUI;
 
-    //public static int activeSkin;
+    private int currentSkin;
 
     private void Awake()
     {
         shopUI = GetComponent<ShopUI>();
+    }
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("ActiveSkin"))
+        {
+            currentSkin = PlayerPrefs.GetInt("ActiveSkin");
+        }
     }
 
     public void BuySkin(int skinIndex)
@@ -20,7 +27,7 @@ public class Shop : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("Money"))
         {
-            if (PlayerPrefs.GetInt("Money") > shopUI.skins[skinIndex].price)
+            if (PlayerPrefs.GetInt("Money") >= shopUI.skins[skinIndex].price)
             {
                 PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - shopUI.skins[skinIndex].price);
                 shopUI.BuySkin(skinIndex);
@@ -32,7 +39,8 @@ public class Shop : MonoBehaviour
 
     public void SetActiveSkin(int skinIndex)
     {
-        //activeSkin = skinIndex;
+        shopUI.ChangeSkin(currentSkin, skinIndex);
+        currentSkin = skinIndex;
         PlayerPrefs.SetInt("ActiveSkin", skinIndex);
     }
 }
