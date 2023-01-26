@@ -15,11 +15,12 @@ public class AdsInit : MonoBehaviour, IUnityAdsInitializationListener, IUnityAds
     void Awake()
     {
         InitializeAds();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void ShowAd()
     {
-        Advertisement.Show(intId);
+        Advertisement.Show(intId, this);
     }
     public void ShowAdWithBonus()
     {
