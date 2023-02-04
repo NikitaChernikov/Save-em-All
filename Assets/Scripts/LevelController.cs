@@ -18,19 +18,13 @@ public class LevelController : MonoBehaviour
     [SerializeField] private Slider bar;
     [SerializeField] private GameObject pauseUI;
 
-    private AdsInit ads;
+    [SerializeField] private AdsInit ads;
 
     //private bool isSound = true;
     private byte score = 0;
 
-    private void Awake()
-    {
-        ads = FindObjectOfType<AdsInit>();
-    }
-
     private void Start()
     {
-        ads.ShowAd();
         Time.timeScale = 1;
         if (isMenu)
         {

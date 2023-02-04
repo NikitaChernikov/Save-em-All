@@ -15,7 +15,7 @@ public class AdsInit : MonoBehaviour, IUnityAdsInitializationListener, IUnityAds
     void Awake()
     {
         InitializeAds();
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     public void ShowAd()
@@ -32,7 +32,7 @@ public class AdsInit : MonoBehaviour, IUnityAdsInitializationListener, IUnityAds
         _gameId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? _iOSGameId
             : _androidGameId;
-        Advertisement.Initialize(_gameId, true, this);
+        Advertisement.Initialize(_gameId, false, this);
     }
 
     public void OnUnityAdsAdLoaded(string placementId)
@@ -70,11 +70,29 @@ public class AdsInit : MonoBehaviour, IUnityAdsInitializationListener, IUnityAds
     }
 
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message) { }
-    public void OnUnityAdsShowStart(string placementId) { }
-    public void OnUnityAdsShowClick(string placementId) { }
-    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState) 
+    public void OnUnityAdsShowStart(string placementId)
     {
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money", 0) + amountOfGold);
-        shopUI.ChangeMoneyText();
+        if (placementId == rewId)
+        {
+            Advertisement.Load(rewId, this);
+        }
+        else
+        {
+            Advertisement.Load(intId, this);
+        }
+    }
+    public void OnUnityAdsShowClick(string placementId) { }
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (placementId == rewId)
+        {
+            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money", 0) + amountOfGold);
+            shopUI.ChangeMoneyText();
+            Advertisement.Load(rewId, this);
+        }
+        else
+        {
+            Advertisement.Load(intId, this);
+        }
     }
 }
