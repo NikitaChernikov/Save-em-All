@@ -52,15 +52,14 @@ public class Asteroid : MonoBehaviour
             }
             if (hit.CompareTag("Player"))
             {
-                hit.GetComponent<Rigidbody>().AddExplosionForce(explosionForce: 1000 ,transform.position, damageRadius);
-                //if (transform.position.z > hit.transform.position.z)
-                //{
-                //    hit.GetComponent<Rigidbody>().AddForce(-hit.transform.forward * 50, ForceMode.Impulse);
-                //}
-                //if (transform.position.z < hit.transform.position.z)
-                //{
-                //    hit.GetComponent<Rigidbody>().AddForce(hit.transform.forward * 50, ForceMode.Impulse);
-                //}
+                if (transform.position.z > hit.transform.position.z)
+                {
+                    hit.GetComponent<Rigidbody>().AddForce(-hit.transform.forward * 50000, ForceMode.Impulse);
+                }
+                if (transform.position.z < hit.transform.position.z)
+                {
+                    hit.GetComponent<Rigidbody>().AddForce(hit.transform.forward * 50000, ForceMode.Impulse);
+                }
                 Time.timeScale = 0.5f;
                 controlButtons.SetActive(false);
                 FindObjectOfType<CarMovement>().enabled = false;
