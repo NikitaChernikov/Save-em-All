@@ -18,7 +18,9 @@ public class LevelController : MonoBehaviour
     [SerializeField] private Slider bar;
     [SerializeField] private GameObject pauseUI;
 
-    private bool isSound = true;
+    [SerializeField] private AdsInit ads;
+
+    //private bool isSound = true;
     private byte score = 0;
 
     private void Start()
@@ -36,11 +38,11 @@ public class LevelController : MonoBehaviour
             }
             if (PlayerPrefs.HasKey("Money"))
             {
-                moneyText.text = "MONEY: " + PlayerPrefs.GetInt("Money");
+                moneyText.text = "GOLD: " + PlayerPrefs.GetInt("Money");
             }
             else
             {
-                moneyText.text = "MONEY: 0";
+                moneyText.text = "GOLD: 0";
             }
         }
     }
@@ -58,6 +60,11 @@ public class LevelController : MonoBehaviour
     }
 
     public void OpenStore()
+    {
+        Invoke("IOpenStore", 0.2f);
+    }
+
+    private void IOpenStore()
     {
         ui[0].SetActive(false);
         ui[1].SetActive(true);
@@ -83,6 +90,7 @@ public class LevelController : MonoBehaviour
 
     public void RestartGame()
     {
+        loadingCanvas.SetActive(true);
         StartCoroutine(WaitScene(SceneManager.GetActiveScene().buildIndex));
     }
 
@@ -94,6 +102,7 @@ public class LevelController : MonoBehaviour
 
     public void GameLost()
     {
+        ads.ShowAd();
         if (PlayerPrefs.HasKey("BestScore"))
         {
             if (score > PlayerPrefs.GetInt("BestScore"))
